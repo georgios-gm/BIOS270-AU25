@@ -185,10 +185,10 @@ git log --oneline --graph --all --decorate --abbrev-commit --pretty=oneline
 > Add your completion screenshots here (Introduction Sequence and Push & Pull — Git Remotes!).
 
 - Introduction Sequence — 4/4 complete:  
-  ![Introduction Sequence](HW/HW1/images/Part1Modules.png)
+  ![Introduction Sequence](images/Part1Modules.png)
 
 - Push & Pull — Git Remotes! — 8/8 complete:  
-  ![Push & Pull](HW/HW1/images/Part2Modules.png)
+  ![Push & Pull](images/Part2Modules.png)
 
 **HW Part C**
 
