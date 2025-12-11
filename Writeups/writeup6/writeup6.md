@@ -4,7 +4,7 @@
 ### 1. Project Overview
 
 - **Overarching goal**
-  This project aims to develop a machine learning model that can predict the the identities and properties of its spatial neighbors in human lung tissue, using Xenium spatial transcriptomics data as ground truth, given a cell's gene expression profile. Ultimately, the goal is to be able to infer spatial context from dissociated single-cell datasets. 
+  This project aims to develop a machine learning model that can predict the the identities and properties of a cell's spatial neighbors in human lung tissue, using Xenium spatial transcriptomics data as ground truth, given a cell's gene expression profile. Ultimately, the goal is to be able to infer spatial context from dissociated single-cell datasets. 
   
 - **Rationale**
   Spatial context is critical for understanding how cells interact, especially in complex organs like the lung where structure–function relationships and microenvironments strongly influence cell fate and disease progression.
@@ -79,4 +79,5 @@
 
 - **Evaluation metrics**  
   We will consider the cosine similarity and correlation between the predicted and observed cellular compositions. Additionally, we will compare with ground-truth biologically-validated method for cell-cell interactions that leverage ligand-receptor pairs. 
+
 
