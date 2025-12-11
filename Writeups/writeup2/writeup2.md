@@ -7,7 +7,7 @@ Here is the activation of the current environment:
 
 Updated environment and images from the example scripts are in the repo. 
 
-![Python Example Script](/BIOS270-AU25/Environment/scripts/python_example_plot.png)
+![Python Example Script](https://raw.githubusercontent.com/georgios-gm/BIOS270-AU25/main/Environment/scripts/python_example_plot.png)
 
 Comparing the original yaml file to the new one, I notice that rpy2 is added, but that I lost the commenting and formatting. 
 
@@ -19,5 +19,6 @@ Responses to the following questions:
 - What micromamba command can you use to remove an environment? micromamba env remove -n bioinfo_example
 
 ## 2. Container
+
 
 
