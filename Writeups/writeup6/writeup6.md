@@ -53,27 +53,30 @@
 ### 4. Pipeline
 
 - **Algorithms and methods**  
-  What models, algorithms, or computational steps do you plan to run? Are there steps that depends on output of other steps?
+  Here is the general pipeline and associated methods that this project will employ:
+  - Data loading and QC: Load Xenium data and remove low-quality cells with insufficient transcripts or rarely expressed genes. Perform batch correction, if needed. 
+  - Cell-type annotation: Map Xenium cells to HLCA-defined cell types to ensure consistency between the different datasets.
+  - Neighborhood definition: Computer the Euclidian distance to to other cells for each cell and identify the nearest 25 neighbors. Then, create a neighbor cell-type composition vector that contains the proportion of each cell type in within that 25-rich neighborhood.
+  - Features: Generate a gene expression vector for each cell with appropriate normalization and potentially dimensionality reduction. 
 
 - **Scalability and efficiency**  
-  How will you ensure your pipeline runs efficiently on your dataset size, format, number of samples?
+  Depending on the computational constraints, we may consider reducing the gene expression dimensionality. Additionally, we will leverage appropriate batching when training our model and avoid ever needed to access the full dataset. 
 
 
 ### 5. Machine Learning
 
-Brainstorm an ML task that can be performed on your data
-
 - **Task definition**  
-  What is the supervised or unsupervised learning problem that appropriate for your data?
+  This task is a supervised task where the input is the gene expression vector and the output is a prediction of the proportion of each defined cell population with the the define 25-cell neighborhood. 
 
 - **Feature representation**  
-  How will you convert raw data into numerical form suitable for modeling?
+  To encode the single-cell gene expression, we intend to try using normalized counts, the top PCs from PCA, or a more advanced method such as the hidden layer of a self-supervised autoencoder. 
 
 - **Model selection**  
-  Which model(s) will you apply and why?
+  For our baseline models, we will use traditional machine learning models such as random forest and XGBoost. Then, we will employ deep neural networks and consider representation learning if the Xenium dataset proves too small for the model to learn meaningful representations of the gene expression patters that hit at adjacent cell-cell communication. 
 
 - **Generalization strategy** (for supervised learning)  
-  How will you ensure your model performs well on unseen data?
+  First, in the model training, we will employ proper test/train/val split and regularization to avoid overfitting. Then, we will assess the model on an unseen Xenium dataset performed by a different lab to ensure that the model maintains its accuracy. 
 
 - **Evaluation metrics**  
-  What metrics will you track? Why are they appropriate for your task?
+  We will consider the cosine similarity and correlation between the predicted and observed cellular compositions. Additionally, we will compare with ground-truth biologically-validated method for cell-cell interactions that leverage ligand-receptor pairs. 
+
