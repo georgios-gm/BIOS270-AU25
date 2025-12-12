@@ -34,38 +34,29 @@ This represents a very singificant decrease in runtime, and it is because the in
 
 ### 3. Upload to Google BigQuery
 
-The dataset you are handling is relatively small. However, for larger datasets or collaborative access, uploading to **Google BigQuery** is a practical approach.
+The presence of `CHUNK_SIZE` is necessary for large tables that require a huge amount of memory. By using chunking, there is a limit to the amount of memory used so that the read operation can scale to very large tables that considered all at once would crash the job. 
 
-Examine the `upload_bigquery.py` script.  
-Explain the role of `CHUNK_SIZE` and why it is necessary:
+Here is the completion of the data uploading: 
 
-```python
-df = pd.read_sql_query(
-    f"SELECT * FROM {table} LIMIT {CHUNK_SIZE} OFFSET {offset}",
-    conn
-)
-```
-Run the `upload_bigquery.py` script (using `bioinformatics_latest.sif` container)
+<img width="779" height="282" alt="Screenshot 2025-12-11 at 4 48 15 PM" src="https://github.com/user-attachments/assets/72735e2d-5384-4523-8f8f-7485d7a2450b" />
 
-```bash
-python upload_bigquery.py --local_database_path <path to the bacteria.db created in Section 1> --project_id <GCP project-id> --dataset_id bacteria
-```
+Here are the results of a toy BigQuery with the output exported as a csv file to my bucket storage: 
 
-Once your dataset has been uploaded, create a query on BigQuery that involves at least **two tables** from the dataset.  
-Export the query results as a **CSV file** to **GCS**.
+<img width="1117" height="1055" alt="Screenshot 2025-12-11 at 4 58 23 PM" src="https://github.com/user-attachments/assets/2b4ca695-ed35-4a41-8055-568683d31d8d" />
+<img width="1082" height="225" alt="Screenshot 2025-12-11 at 4 59 35 PM" src="https://github.com/user-attachments/assets/622a22e6-0030-48aa-ac92-5ae21e2f5d87" />
 
 
 ### 4. HDF5 Data
 
-Review the `create_protein_h5.sh` and `create_protein_h5.py` scripts.  
-Make sure you understand their functionality. You won't need to run these scripts as they take a few hours to complete.
-
-Explain why the following chunk configuration makes sense - what kind of data access pattern is expected, and why does this align with biological use cases?
+The below chunking size makes sense because we are likely to want all of the features for a given protein at once, but we would rarely want the value for a specific feature of all the proteins at once. Biologically, this makes sense since we are interested in making biological conclusions about our proteins and reading them in batches with all the features. 
 
 ```python
 chunk_size = 1000
 chunks = (chunk_size, n_features)
 ```
+
+
+
 
 
 
